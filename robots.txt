@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+
+# PWA files
+Allow: /manifest.json
+Allow: /service-worker.js
+Allow: /js/
+Allow: /icons/
+Allow: /screenshots/
+
+# Supabase storage
+Allow: https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images/
+
+# Sitemap
+Sitemap: https://krarar.github.io/Clashy/sitemap.xml
+
+# Crawl-delay for better performance
+Crawl-delay: 1
+
+# Cache directive for PWA files
+# These files should be crawled but cached appropriately
+User-agent: *
+Allow: /manifest.json
+Allow: /service-worker.js
+
+# Block admin and API endpoints
+Disallow: /admin/
+Disallow: /api/private/
+
+# Allow important pages
+Allow: /index.html
+Allow: /alhajami.html
+Allow: /
+Allow: /#stores
+Allow: /#contact
+Allow: /#about

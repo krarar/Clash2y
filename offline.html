@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كلاشي - غير متصل</title>
+    <meta name="description" content="كلاشي غير متصل - يمكنك تصفح المحتوى المحفوظ">
+    <meta name="theme-color" content="#8B5CF6">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png">
+    <link rel="apple-touch-icon" href="https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png">
+    
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%);
+            --primary-solid: #8B5CF6;
+            --secondary: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+            --accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --radius-xl: 0.75rem;
+            --radius-2xl: 1rem;
+            --radius-3xl: 1.5rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Tahoma', sans-serif;
+            background: 
+                linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 25%, rgba(51, 65, 85, 0.85) 50%, rgba(71, 85, 105, 0.8) 75%, rgba(100, 116, 139, 0.75) 100%),
+                url('https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #F1F5F9;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-4);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Enhanced Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: backgroundPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Floating particles */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.1), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(139, 92, 246, 0.3), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(6, 182, 212, 0.2), transparent);
+            background-size: 200px 100px;
+            animation: floatingParticles 15s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes floatingParticles {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .offline-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-3xl);
+            padding: var(--space-12) var(--space-8);
+            max-width: 600px;
+            width: 100%;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            animation: containerSlideIn 0.8s ease-out;
+        }
+
+        @keyframes containerSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .offline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .offline-container:hover::before {
+            opacity: 1;
+        }
+
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: var(--space-6);
+            animation: iconPulse 2s infinite;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.05); 
+            }
+        }
+
+        .offline-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: var(--space-4);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .offline-message {
+            font-size: 1.2rem;
+            color: #CBD5E1;
+            margin-bottom: var(--space-8);
+            line-height: 1.7;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .offline-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: var(--space-4);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-2);
+            display: block;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            color: #E2E8F0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: var(--space-4) var(--space-6);
+            border: none;
+            border-radius: var(--radius-xl);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            background: #EF4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-xl);
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: statusBlink 2s infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Logo section */
+        .logo-section {
+            margin-bottom: var(--space-6);
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-4);
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .offline-container {
+                padding: var(--space-8) var(--space-6);
+                margin: var(--space-4);
+            }
+
+            .offline-title {
+                font-size: 2rem;
+            }
+
+            .offline-message {
+                font-size: 1rem;
+            }
+
+            .offline-features {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .offline-icon {
+                font-size: 3.5rem;
+            }
+
+            .offline-title {
+                font-size: 1.8rem;
+            }
+
+            .offline-container {
+                padding: var(--space-6) var(--space-4);
+            }
+
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Additional animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-item {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 0.1s; }
+        .feature-item:nth-child(2) { animation-delay: 0.2s; }
+        .feature-item:nth-child(3) { animation-delay: 0.3s; }
+        .feature-item:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="status-indicator">
+        <div class="status-dot"></div>
+        غير متصل
+    </div>
+
+    <div class="offline-container">
+        <div class="logo-section">
+            <div class="logo-icon">كلاشي</div>
+            <div class="logo-text">PWA متطور</div>
+        </div>
+
+        <div class="offline-icon">📶</div>
+        
+        <h1 class="offline-title">غير متصل بالإنترنت</h1>
+        
+        <p class="offline-message">
+            عذراً، لا يوجد اتصال بالإنترنت حالياً.<br>
+            لكن يمكنك الاستفادة من الميزات التالية المتاحة بدون نت:
+        </p>
+
+        <div class="offline-features">
+            <div class="feature-item">
+                <span class="feature-icon">🏪</span>
+                <div class="feature-text">تصفح المتاجر المحفوظة</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📱</span>
+                <div class="feature-text">واجهة PWA كاملة</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">💾</span>
+                <div class="feature-text">البيانات المؤقتة</div>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🔄</span>
+                <div class="feature-text">مزامنة تلقائية</div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="retryConnection()">
+                🔄 إعادة المحاولة
+            </button>
+            <a href="/" class="btn btn-secondary">
+                🏠 العودة للرئيسية
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Check network status
+        function updateNetworkStatus() {
+            const status = navigator.onLine;
+            const indicator = document.querySelector('.status-indicator');
+            const dot = document.querySelector('.status-dot');
+            
+            if (status) {
+                indicator.style.background = '#10B981';
+                indicator.innerHTML = '<div class="status-dot"></div>متصل';
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                indicator.style.background = '#EF4444';
+                indicator.innerHTML = '<div class="status-dot"></div>غير متصل';
+            }
+        }
+
+        // Retry connection
+        function retryConnection() {
+            const btn = document.querySelector('.btn-primary');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '⏳ جاري الاتصال...';
+            btn.disabled = true;
+            
+            // Simulate connection attempt
+            setTimeout(() => {
+                if (navigator.onLine) {
+                    btn.innerHTML = '✅ متصل!';
+                    btn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    btn.innerHTML = '❌ فشل الاتصال';
+                    btn.style.background = 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.style.background = '';
+                    }, 2000);
+                }
+            }, 2000);
+        }
+
+        // Listen for network changes
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+
+        // Check if service worker is available
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(() => {
+                console.log('📱 Service Worker ready - PWA features available');
+            });
+        }
+
+        // Auto-retry every 30 seconds
+        setInterval(() => {
+            if (navigator.onLine) {
+                updateNetworkStatus();
+            }
+        }, 30000);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+                e.preventDefault();
+                retryConnection();
+            }
+            if (e.key === 'Escape') {
+                window.location.href = '/';
+            }
+        });
+
+        // Initial check
+        updateNetworkStatus();
+
+        console.log('📱 كلاشي PWA - صفحة غير متصل محملة');
+        console.log('🔄 التحقق من الاتصال كل 30 ثانية');
+        console.log('⌨️ اختصارات: F5 (إعادة محاولة), Esc (الرئيسية)');
+    </script>
+</body>
+</html>

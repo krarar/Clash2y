@@ -1,0 +1,159 @@
+{
+  "name": "clashy-pwa",
+  "version": "5.0.0",
+  "description": "تطبيق PWA متطور يجمع أفضل المتاجر المحلية في شبكة تفاعلية مع قاعدة بيانات سحابية",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "dev": "npx serve . -p 8080 --live",
+    "build": "echo 'Static PWA - No build step required'",
+    "test": "echo 'No tests configured'",
+    "deploy": "gh-pages -d .",
+    "lighthouse": "npx lighthouse --chrome-flags='--headless' --output=html --output-path=./lighthouse-report.html https://krarar.github.io/Clashy/",
+    "validate": "npx web-app-manifest-validator ./manifest.json",
+    "sw-precache": "sw-precache --config=sw-precache-config.js",
+    "pwa-audit": "npx pwa-builder-cli analyze https://krarar.github.io/Clashy/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krarar/Clashy.git"
+  },
+  "keywords": [
+    "pwa",
+    "progressive-web-app",
+    "متاجر",
+    "تسوق",
+    "العراق",
+    "supabase",
+    "service-worker",
+    "manifest",
+    "offline-first",
+    "mobile-app",
+    "arabic",
+    "rtl",
+    "shopping",
+    "stores",
+    "iraq",
+    "baghdad",
+    "ecommerce",
+    "marketplace"
+  ],
+  "author": {
+    "name": "كلاشي تيم",
+    "email": "info@emall-iq.com",
+    "url": "https://krarar.github.io/Clashy/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krarar/Clashy/issues"
+  },
+  "homepage": "https://krarar.github.io/Clashy/",
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "lighthouse": "^11.4.0",
+    "gh-pages": "^6.1.1",
+    "web-app-manifest-validator": "^1.0.0",
+    "sw-precache": "^5.2.1",
+    "pwa-builder-cli": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "pwa": {
+    "name": "كلاشي",
+    "short_name": "كلاشي",
+    "description": "تطبيق PWA متطور يجمع أفضل المتاجر المحلية",
+    "theme_color": "#8B5CF6",
+    "background_color": "#0F172A",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "start_url": "/",
+    "scope": "/",
+    "lang": "ar",
+    "dir": "rtl"
+  },
+  "manifest": {
+    "icons": [
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "152x152",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "384x384",
+        "type": "image/png"
+      },
+      {
+        "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  },
+  "directories": {
+    "lib": "./js",
+    "doc": "./docs"
+  },
+  "files": [
+    "index.html",
+    "manifest.json",
+    "service-worker.js",
+    "offline.html",
+    "js/",
+    "icons/",
+    "screenshots/",
+    "robots.txt",
+    "sitemap.xml"
+  ],
+  "config": {
+    "serve_port": 3000,
+    "dev_port": 8080
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://wa.me/9647813798636"
+  },
+  "contributors": [
+    {
+      "name": "السعبري",
+      "email": "info@emall-iq.com",
+      "url": "https://wa.me/9647813798636"
+    }
+  ],
+  "workspaces": [
+    "."
+  ]
+}

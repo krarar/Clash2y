@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>كلاشي | متاجر متعددة - التحديث الرابع</title>
+    <meta name="description" content="كلاشي - مجموعة متنوعة من المتاجر المختلفة في مكان واحد">
+    <meta name="keywords" content="كلاشي، متاجر، تسوق، أونلاين، العراق">
+    <meta name="author" content="كلاشي">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#8B5CF6">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="المول الإلكتروني">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Supabase Client - Updated CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            /* Colors */
+            --primary: linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%);
+            --primary-solid: #8B5CF6;
+            --secondary: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+            --secondary-solid: #06B6D4;
+            --accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            --accent-solid: #F59E0B;
+            --success: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --success-solid: #10B981;
+            --error: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            --error-solid: #EF4444;
+            
+            /* Store Colors - Extended */
+            --pink: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+            --pink-solid: #EC4899;
+            --indigo: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+            --indigo-solid: #6366F1;
+            --emerald: linear-gradient(135deg, #059669 0%, #047857 100%);
+            --emerald-solid: #059669;
+            --orange: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+            --orange-solid: #F97316;
+            --teal: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
+            --teal-solid: #0D9488;
+            --violet: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+            --violet-solid: #7C3AED;
+            --red: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            --red-solid: #DC2626;
+            --blue: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+            --blue-solid: #2563EB;
+            --green: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+            --green-solid: #16A34A;
+            --yellow: linear-gradient(135deg, #EAB308 0%, #CA8A04 100%);
+            --yellow-solid: #EAB308;
+            --purple: linear-gradient(135deg, #9333EA 0%, #7C2D12 100%);
+            --purple-solid: #9333EA;
+            --cyan: linear-gradient(135deg, #0891B2 0%, #0E7490 100%);
+            --cyan-solid: #0891B2;
+            --rose: linear-gradient(135deg, #F43F5E 0%, #E11D48 100%);
+            --rose-solid: #F43F5E;
+            --lime: linear-gradient(135deg, #65A30D 0%, #4D7C0F 100%);
+            --lime-solid: #65A30D;
+            --amber: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+            --amber-solid: #D97706;
+            --slate: linear-gradient(135deg, #475569 0%, #334155 100%);
+            --slate-solid: #475569;
+            
+            /* Neutrals */
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-300: #CBD5E1;
+            --gray-400: #94A3B8;
+            --gray-500: #64748B;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1E293B;
+            --gray-900: #0F172A;
+            
+            /* Glass */
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-strong: rgba(255, 255, 255, 0.12);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --shadow-colored: 0 20px 30px -10px rgba(139, 92, 246, 0.3);
+            
+            /* Typography */
+            --font-xs: 0.65rem;
+            --font-sm: 0.75rem;
+            --font-base: 0.8rem;
+            --font-lg: 0.9rem;
+            --font-xl: 1rem;
+            --font-2xl: 1.1rem;
+            --font-3xl: 1.3rem;
+            --font-4xl: 1.6rem;
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            
+            /* Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --radius-2xl: 1rem;
+            --radius-3xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease-out;
+            --transition-base: 0.2s ease-out;
+            --transition-slow: 0.3s ease-out;
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 25%, #334155 50%, #475569 75%, #64748B 100%);
+            background-attachment: fixed;
+            color: var(--gray-100);
+            overflow-x: hidden;
+            line-height: 1.4;
+            font-size: var(--font-base);
+            min-height: 100vh;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Enhanced Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 70%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: backgroundPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Floating Particles */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.1), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(139, 92, 246, 0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(6, 182, 212, 0.3), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(245, 158, 11, 0.2), transparent);
+            background-size: 200px 100px;
+            animation: floatingParticles 20s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes floatingParticles {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-100px); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: var(--space-2) 0;
+            height: 60px;
+            transition: all var(--transition-base);
+        }
+
+        .header.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: var(--shadow-lg);
+            height: 55px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-xl);
+            font-weight: 800;
+            color: white;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: logoShine 3s ease-in-out infinite;
+        }
+
+        @keyframes logoShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+
+        .logo-text h1 {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: var(--font-xs);
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+            cursor: pointer;
+            font-size: var(--font-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transition: all var(--transition-smooth);
+            transform: translate(-50%, -50%);
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .action-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .action-btn:active {
+            transform: translateY(0) scale(1.05);
+        }
+
+        .action-btn.admin {
+            background: var(--orange);
+        }
+
+        .action-btn.admin:hover {
+            background: var(--orange);
+            box-shadow: 0 20px 30px -10px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Database Status */
+        .db-status {
+            position: fixed;
+            top: 70px;
+            right: var(--space-3);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2) var(--space-3);
+            font-size: var(--font-xs);
+            color: var(--gray-300);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            transition: all var(--transition-base);
+        }
+
+        .db-status.connected {
+            border-color: var(--success-solid);
+            color: var(--success-solid);
+        }
+
+        .db-status.error {
+            border-color: var(--error-solid);
+            color: var(--error-solid);
+        }
+
+        .db-status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gray-500);
+            animation: pulse 2s infinite;
+        }
+
+        .db-status.connected .db-status-indicator {
+            background: var(--success-solid);
+        }
+
+        .db-status.error .db-status-indicator {
+            background: var(--error-solid);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: var(--space-4) 0 80px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: var(--space-3);
+            padding-right: var(--space-3);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+            padding: var(--space-6) 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: var(--font-4xl);
+            font-weight: 800;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: var(--radius-full);
+            animation: titleUnderline 2s ease-in-out infinite;
+        }
+
+        @keyframes titleUnderline {
+            0%, 100% { width: 60px; }
+            50% { width: 80px; }
+        }
+
+        .section-subtitle {
+            font-size: var(--font-lg);
+            color: var(--gray-300);
+            font-weight: 500;
+            margin-bottom: var(--space-4);
+        }
+
+        .section-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-6);
+            margin-top: var(--space-4);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-3);
+            background: var(--glass);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+            min-width: 80px;
+            transition: all var(--transition-base);
+        }
+
+        .stat-item:hover {
+            background: var(--glass-strong);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            background: var(--secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: var(--font-xs);
+            color: var(--gray-400);
+            font-weight: 600;
+        }
+
+        /* Enhanced Stores Grid */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .store-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-3xl);
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+            position: relative;
+            cursor: pointer;
+            aspect-ratio: 0.85;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+            transform-style: preserve-3d;
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: all var(--transition-smooth);
+            z-index: 1;
+        }
+
+        .store-card:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(5deg);
+            box-shadow: var(--shadow-2xl), 0 0 30px rgba(139, 92, 246, 0.2);
+            border-color: var(--primary-solid);
+        }
+
+        .store-card:hover::before {
+            opacity: 1;
+        }
+
+        .store-card:active {
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .store-card.coming-soon {
+            opacity: 0.8;
+        }
+
+        .store-card.coming-soon:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: var(--glass-border);
+        }
+
+        .store-header {
+            position: relative;
+            height: 45%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .store-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255,255,255,0.2) 50%, 
+                transparent 100%);
+            animation: shimmerWave 3s infinite;
+        }
+
+        @keyframes shimmerWave {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .store-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: all var(--transition-smooth);
+        }
+
+        .store-card:hover .store-header::after {
+            opacity: 1;
+            animation: pulseGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+        }
+
+        .store-icon {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            z-index: 2;
+            position: relative;
+            transition: all var(--transition-smooth);
+        }
+
+        .store-card:hover .store-icon {
+            transform: scale(1.2) rotate(5deg);
+            text-shadow: 4px 4px 16px rgba(0,0,0,0.4);
+        }
+
+        .store-content {
+            padding: var(--space-4);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .store-name {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: white;
+            margin-bottom: var(--space-3);
+            line-height: 1.2;
+            transition: all var(--transition-base);
+        }
+
+        .store-card:hover .store-name {
+            color: var(--primary-solid);
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .store-description {
+            font-size: var(--font-sm);
+            color: var(--gray-300);
+            margin-bottom: var(--space-4);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+            transition: all var(--transition-base);
+        }
+
+        .store-card:hover .store-description {
+            color: var(--gray-200);
+        }
+
+        .store-action {
+            margin-top: auto;
+        }
+
+        .store-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            padding: var(--space-3) var(--space-4);
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 600;
+            font-size: var(--font-sm);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            transition: all var(--transition-smooth);
+            transform: translate(-50%, -50%);
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl), 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .store-btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .store-btn:active {
+            transform: translateY(0);
+        }
+
+        .store-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .store-btn:disabled:hover::before {
+            width: 0;
+            height: 0;
+        }
+
+        /* Store Colors - Extended */
+        .store-card.clothing .store-header { background: var(--pink); }
+        .store-card.clothing:hover { border-color: var(--pink-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(236, 72, 153, 0.3); }
+
+        .store-card.grocery .store-header { background: var(--emerald); }
+        .store-card.grocery:hover { border-color: var(--emerald-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(5, 150, 105, 0.3); }
+
+        .store-card.home .store-header { background: var(--orange); }
+        .store-card.home:hover { border-color: var(--orange-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(249, 115, 22, 0.3); }
+
+        .store-card.electronics .store-header { background: var(--indigo); }
+        .store-card.electronics:hover { border-color: var(--indigo-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(99, 102, 241, 0.3); }
+
+        .store-card.phones .store-header { background: var(--secondary); }
+        .store-card.phones:hover { border-color: var(--secondary-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(6, 182, 212, 0.3); }
+
+        .store-card.textiles .store-header { background: var(--teal); }
+        .store-card.textiles:hover { border-color: var(--teal-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(13, 148, 136, 0.3); }
+
+        /* New Color Classes */
+        .store-card.red .store-header { background: var(--red); }
+        .store-card.red:hover { border-color: var(--red-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(220, 38, 38, 0.3); }
+
+        .store-card.blue .store-header { background: var(--blue); }
+        .store-card.blue:hover { border-color: var(--blue-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(37, 99, 235, 0.3); }
+
+        .store-card.green .store-header { background: var(--green); }
+        .store-card.green:hover { border-color: var(--green-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(22, 163, 74, 0.3); }
+
+        .store-card.yellow .store-header { background: var(--yellow); }
+        .store-card.yellow:hover { border-color: var(--yellow-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(234, 179, 8, 0.3); }
+
+        .store-card.purple .store-header { background: var(--purple); }
+        .store-card.purple:hover { border-color: var(--purple-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(147, 51, 234, 0.3); }
+
+        .store-card.cyan .store-header { background: var(--cyan); }
+        .store-card.cyan:hover { border-color: var(--cyan-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(8, 145, 178, 0.3); }
+
+        .store-card.rose .store-header { background: var(--rose); }
+        .store-card.rose:hover { border-color: var(--rose-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(244, 63, 94, 0.3); }
+
+        .store-card.lime .store-header { background: var(--lime); }
+        .store-card.lime:hover { border-color: var(--lime-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(101, 163, 13, 0.3); }
+
+        .store-card.amber .store-header { background: var(--amber); }
+        .store-card.amber:hover { border-color: var(--amber-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(217, 119, 6, 0.3); }
+
+        .store-card.slate .store-header { background: var(--slate); }
+        .store-card.slate:hover { border-color: var(--slate-solid); box-shadow: var(--shadow-2xl), 0 0 30px rgba(71, 85, 105, 0.3); }
+
+        /* Enhanced Coming Soon Badge */
+        .coming-soon-badge {
+            position: absolute;
+            top: var(--space-3);
+            right: var(--space-3);
+            background: var(--accent);
+            color: white;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-xs);
+            font-weight: 700;
+            box-shadow: var(--shadow-lg);
+            z-index: 10;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Enhanced Add Store Button */
+        .add-store-btn {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 2px dashed var(--primary-solid);
+            border-radius: var(--radius-3xl);
+            aspect-ratio: 0.85;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            color: var(--primary-solid);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-store-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            transition: all var(--transition-smooth);
+            transform: translate(-50%, -50%);
+        }
+
+        .add-store-btn:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--secondary-solid);
+            color: var(--secondary-solid);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .add-store-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .add-store-icon {
+            font-size: 3.5rem;
+            margin-bottom: var(--space-4);
+            transition: all var(--transition-smooth);
+        }
+
+        .add-store-btn:hover .add-store-icon {
+            transform: rotate(180deg) scale(1.2);
+        }
+
+        .add-store-text {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--glass-border);
+            border-top: 4px solid var(--primary-solid);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: var(--space-4);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--gray-300);
+            font-size: var(--font-lg);
+            font-weight: 600;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: var(--space-2) 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 var(--space-3);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+            color: var(--gray-400);
+            text-decoration: none;
+            padding: var(--space-2);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-smooth);
+            cursor: pointer;
+            min-width: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            transition: all var(--transition-smooth);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .nav-item.active {
+            color: var(--primary-solid);
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-item:hover::before {
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav-icon {
+            font-size: var(--font-lg);
+            transition: all var(--transition-base);
+        }
+
+        .nav-item:hover .nav-icon {
+            transform: scale(1.2);
+        }
+
+        .nav-label {
+            font-size: var(--font-xs);
+            font-weight: 600;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-3);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: modalFadeIn var(--transition-base) ease-out;
+        }
+
+        .modal-content {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-3xl);
+            padding: var(--space-6);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn var(--transition-base) ease-out;
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-5);
+            padding-bottom: var(--space-4);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .modal-title {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: var(--error);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            font-size: var(--font-sm);
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Enhanced Form Styles */
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            color: var(--gray-300);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            font-size: var(--font-sm);
+            transition: all var(--transition-smooth);
+            outline: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: var(--primary-solid);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            padding: var(--space-4) var(--space-5);
+            border: none;
+            border-radius: var(--radius-xl);
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 600;
+            font-size: var(--font-sm);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transition: all var(--transition-smooth);
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        /* Enhanced Notification */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: var(--space-4);
+            background: var(--success);
+            color: white;
+            padding: var(--space-4) var(--space-5);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-2xl);
+            z-index: 1003;
+            transform: translateX(400px);
+            transition: all var(--transition-smooth);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-size: var(--font-sm);
+            max-width: 350px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            animation: notificationBounce 0.5s ease-out;
+        }
+
+        @keyframes notificationBounce {
+            0% { transform: translateX(400px); }
+            60% { transform: translateX(-10px); }
+            80% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .notification.error {
+            background: var(--error);
+        }
+
+        .notification.warning {
+            background: var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding-left: var(--space-2);
+                padding-right: var(--space-2);
+                margin-top: 55px;
+            }
+
+            .stores-grid {
+                gap: var(--space-3);
+                max-width: 100%;
+            }
+
+            .store-card {
+                min-height: 240px;
+            }
+
+            .store-header {
+                height: 40%;
+            }
+
+            .store-icon {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: var(--font-3xl);
+            }
+
+            .add-store-btn {
+                min-height: 240px;
+            }
+
+            .add-store-icon {
+                font-size: 2.8rem;
+            }
+
+            .section-stats {
+                gap: var(--space-3);
+            }
+
+            .db-status {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stores-grid {
+                gap: var(--space-2);
+            }
+
+            .store-card {
+                min-height: 200px;
+                border-radius: var(--radius-2xl);
+            }
+
+            .store-header {
+                height: 35%;
+            }
+
+            .store-icon {
+                font-size: 1.8rem;
+            }
+
+            .store-content {
+                padding: var(--space-3);
+            }
+
+            .store-name {
+                font-size: var(--font-lg);
+                margin-bottom: var(--space-2);
+            }
+
+            .store-description {
+                font-size: var(--font-xs);
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+            }
+
+            .store-btn {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--font-xs);
+            }
+
+            .header-content {
+                padding: 0 var(--space-2);
+            }
+
+            .main-content {
+                padding-left: var(--space-2);
+                padding-right: var(--space-2);
+                padding-top: var(--space-2);
+            }
+
+            .modal-content {
+                padding: var(--space-4);
+                margin: var(--space-2);
+                border-radius: var(--radius-2xl);
+            }
+
+            .add-store-btn {
+                min-height: 200px;
+                border-radius: var(--radius-2xl);
+            }
+
+            .add-store-icon {
+                font-size: 2.2rem;
+            }
+
+            .add-store-text {
+                font-size: var(--font-base);
+            }
+
+            .section-header {
+                padding: var(--space-4) 0;
+                margin-bottom: var(--space-6);
+            }
+
+            .section-title {
+                font-size: var(--font-2xl);
+            }
+
+            .section-stats {
+                gap: var(--space-2);
+                flex-wrap: wrap;
+            }
+
+            .notification {
+                right: var(--space-2);
+                max-width: calc(100vw - var(--space-4));
+            }
+        }
+
+        /* Animations */
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
+        .animate-delay-6 { animation-delay: 0.6s; opacity: 0; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-solid);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-solid);
+        }
+
+        /* Utility Classes */
+        .hide { display: none !important; }
+        .show { display: block !important; }
+
+        /* Success Animation */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-animation {
+            animation: successPulse 0.6s ease-in-out;
+        }
+
+        /* Sync Animation */
+        @keyframes syncSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .syncing {
+            animation: syncSpin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">جاري التحميل...</div>
+    </div>
+
+    <!-- Database Status -->
+    <div class="db-status" id="dbStatus">
+        <div class="db-status-indicator"></div>
+        <span id="dbStatusText">جاري الاتصال بقاعدة البيانات...</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon" style="font-size:1.3rem; background: linear-gradient(135deg,#F59E0B,#8B5CF6); color: #fff; font-weight:900; letter-spacing:2px; width:70px; height:40px; justify-content:center; align-items:center; display:flex;">
+                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;">كلاشي</span>
+                </div>
+                <div class="logo-text">
+                    <h1 style="font-size:1.1rem; font-weight:900; background: linear-gradient(90deg,#F59E0B,#8B5CF6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;">
+                        كلاشي
+                    </h1>
+                    <p style="font-size:0.8rem; color:#aaa; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;">التحديث الرابع + DB</p>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <div class="action-btn" onclick="scrollToStores()" title="المتاجر">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="action-btn" onclick="syncData()" title="مزامنة البيانات" id="syncBtn">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="action-btn admin" onclick="toggleAdmin()" title="إدارة المتاجر">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="action-btn" onclick="showContact()" title="تواصل معنا">
+                    <i class="fas fa-phone"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Stores Section -->
+        <section class="stores-section" id="stores">
+            <div class="section-header">
+                <h2 class="section-title">🏪 متاجرنا المتطورة</h2>
+                <p class="section-subtitle">التحديث الرابع مع قاعدة البيانات السحابية</p>
+                
+                <div class="section-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="storeCount">0</div>
+                        <div class="stat-label">متاجر</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">🔗</div>
+                        <div class="stat-label">Supabase</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">خدمة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">⭐ 4.9</div>
+                        <div class="stat-label">تقييم</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stores-container">
+                <div class="stores-grid" id="storesGrid">
+                    <!-- المتاجر ستتم إضافتها ديناميكياً من قاعدة البيانات -->
+                    
+                    <!-- Add Store Button (للمدراء فقط) -->
+                    <div class="add-store-btn hide" id="addStoreBtn" onclick="openAddStoreModal()">
+                        <i class="fas fa-plus add-store-icon"></i>
+                        <div class="add-store-text">إضافة متجر جديد</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <div class="nav-item active" onclick="goToHome()">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-label">الرئيسية</span>
+            </div>
+            <div class="nav-item" onclick="scrollToStores()">
+                <i class="fas fa-store nav-icon"></i>
+                <span class="nav-label">المتاجر</span>
+            </div>
+            <div class="nav-item" onclick="showContact()">
+                <i class="fas fa-phone nav-icon"></i>
+                <span class="nav-label">تواصل</span>
+            </div>
+            <div class="nav-item" onclick="showAbout()">
+                <i class="fas fa-info-circle nav-icon"></i>
+                <span class="nav-label">حول</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Add Store Modal -->
+    <div class="modal" id="addStoreModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-plus-circle"></i>
+                    إضافة متجر جديد
+                </h3>
+                <button class="close-btn" onclick="closeModal('addStoreModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="addStoreForm" onsubmit="handleAddStore(event)">
+                <div class="form-group">
+                    <label class="form-label">اسم المتجر *</label>
+                    <input type="text" class="form-input" id="storeName" required placeholder="أدخل اسم المتجر">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">وصف المتجر *</label>
+                    <input type="text" class="form-input" id="storeDescription" required placeholder="وصف مختصر للمتجر">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">رابط/اسم الملف *</label>
+                    <input type="text" class="form-input" id="storeUrl" required placeholder="مثل: ./mystore.html">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">أيقونة المتجر *</label>
+                    <select class="form-select" id="storeIcon" required>
+                        <option value="">اختر الأيقونة</option>
+                        <optgroup label="🛍️ تسوق وملابس">
+                            <option value="fas fa-tshirt">👕 ملابس</option>
+                            <option value="fas fa-female">👗 ملابس نسائية</option>
+                            <option value="fas fa-male">👔 ملابس رجالية</option>
+                            <option value="fas fa-baby">👶 ملابس أطفال</option>
+                            <option value="fas fa-shoe-prints">👟 أحذية</option>
+                            <option value="fas fa-shopping-bag">🛍️ حقائب</option>
+                            <option value="fas fa-user-tie">👔 رسمي</option>
+                        </optgroup>
+                        <optgroup label="🍕 طعام ومشروبات">
+                            <option value="fas fa-utensils">🍽️ مطاعم</option>
+                            <option value="fas fa-pizza-slice">🍕 بيتزا</option>
+                            <option value="fas fa-hamburger">🍔 برجر</option>
+                            <option value="fas fa-coffee">☕ قهوة</option>
+                            <option value="fas fa-ice-cream">🍦 حلويات</option>
+                            <option value="fas fa-birthday-cake">🎂 كيك</option>
+                            <option value="fas fa-apple-alt">🍎 فواكه</option>
+                        </optgroup>
+                        <optgroup label="🏠 منزل ومعيشة">
+                            <option value="fas fa-home">🏠 منزل</option>
+                            <option value="fas fa-couch">🛋️ أثاث</option>
+                            <option value="fas fa-bed">🛏️ غرف نوم</option>
+                            <option value="fas fa-chair">🪑 كراسي</option>
+                            <option value="fas fa-lightbulb">💡 إضاءة</option>
+                            <option value="fas fa-tools">🔧 أدوات</option>
+                            <option value="fas fa-paint-roller">🎨 دهانات</option>
+                        </optgroup>
+                        <optgroup label="📱 تكنولوجيا">
+                            <option value="fas fa-mobile-alt">📱 هواتف</option>
+                            <option value="fas fa-laptop">💻 لابتوب</option>
+                            <option value="fas fa-tv">📺 تلفزيون</option>
+                            <option value="fas fa-headphones">🎧 سماعات</option>
+                            <option value="fas fa-camera">📷 كاميرات</option>
+                            <option value="fas fa-gamepad">🎮 ألعاب</option>
+                            <option value="fas fa-keyboard">⌨️ اكسسوارات</option>
+                        </optgroup>
+                        <optgroup label="🚗 سيارات ووسائل نقل">
+                            <option value="fas fa-car">🚗 سيارات</option>
+                            <option value="fas fa-motorcycle">🏍️ دراجات</option>
+                            <option value="fas fa-truck">🚚 شاحنات</option>
+                            <option value="fas fa-gas-pump">⛽ وقود</option>
+                            <option value="fas fa-wrench">🔧 صيانة</option>
+                            <option value="fas fa-tire">🛞 إطارات</option>
+                        </optgroup>
+                        <optgroup label="💄 جمال وعناية">
+                            <option value="fas fa-cut">✂️ صالون</option>
+                            <option value="fas fa-spa">💆 سبا</option>
+                            <option value="fas fa-perfume">💄 عطور</option>
+                            <option value="fas fa-hand-sparkles">✨ عناية</option>
+                        </optgroup>
+                        <optgroup label="📚 تعليم وثقافة">
+                            <option value="fas fa-book">📚 كتب</option>
+                            <option value="fas fa-graduation-cap">🎓 تعليم</option>
+                            <option value="fas fa-school">🏫 مدرسة</option>
+                            <option value="fas fa-pencil-alt">✏️ قرطاسية</option>
+                        </optgroup>
+                        <optgroup label="🏥 صحة ورياضة">
+                            <option value="fas fa-dumbbell">🏋️ رياضة</option>
+                            <option value="fas fa-heartbeat">❤️ صحة</option>
+                            <option value="fas fa-pills">💊 صيدلية</option>
+                            <option value="fas fa-running">🏃 جري</option>
+                        </optgroup>
+                        <optgroup label="🎨 هوايات وفنون">
+                            <option value="fas fa-palette">🎨 فنون</option>
+                            <option value="fas fa-music">🎵 موسيقى</option>
+                            <option value="fas fa-guitar">🎸 آلات</option>
+                            <option value="fas fa-camera-retro">📸 تصوير</option>
+                        </optgroup>
+                        <optgroup label="🌱 أخرى">
+                            <option value="fas fa-seedling">🌱 زراعة</option>
+                            <option value="fas fa-gem">💎 مجوهرات</option>
+                            <option value="fas fa-gift">🎁 هدايا</option>
+                            <option value="fas fa-star">⭐ مميز</option>
+                            <option value="fas fa-heart">❤️ مفضل</option>
+                            <option value="fas fa-fire">🔥 الأكثر مبيعاً</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">لون المتجر *</label>
+                    <select class="form-select" id="storeColor" required>
+                        <option value="">اختر اللون</option>
+                        <optgroup label="ألوان أساسية">
+                            <option value="primary">🟣 بنفسجي أساسي</option>
+                            <option value="secondary">🔵 أزرق ثانوي</option>
+                            <option value="red">🔴 أحمر</option>
+                            <option value="blue">🔵 أزرق</option>
+                            <option value="green">🟢 أخضر</option>
+                            <option value="yellow">🟡 أصفر</option>
+                        </optgroup>
+                        <optgroup label="ألوان متقدمة">
+                            <option value="pink">🩷 وردي</option>
+                            <option value="purple">🟣 بنفسجي داكن</option>
+                            <option value="violet">🟪 بنفسجي فاتح</option>
+                            <option value="indigo">🔵 نيلي</option>
+                            <option value="cyan">🩵 سماوي</option>
+                            <option value="teal">🐚 تركوازي</option>
+                        </optgroup>
+                        <optgroup label="ألوان طبيعية">
+                            <option value="emerald">💚 زمردي</option>
+                            <option value="lime">🟢 ليموني</option>
+                            <option value="orange">🟠 برتقالي</option>
+                            <option value="amber">🟠 كهرماني</option>
+                            <option value="rose">🌹 وردي غامق</option>
+                        </optgroup>
+                        <optgroup label="ألوان محايدة">
+                            <option value="slate">⚫ رمادي</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-full">
+                    <i class="fas fa-save"></i>
+                    حفظ في قاعدة البيانات
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-phone"></i>
+                    تواصل معنا
+                </h3>
+                <button class="close-btn" onclick="closeModal('contactModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div style="text-align: center; padding: var(--space-4);">
+                <div style="margin-bottom: var(--space-5);">
+                    <h4 style="color: var(--primary-solid); margin-bottom: var(--space-4); font-size: var(--font-xl);">معلومات التواصل</h4>
+                    <p style="color: var(--gray-300); margin-bottom: var(--space-3); font-size: var(--font-lg);">🏠 العراق - بغداد</p>
+                    <p style="color: var(--gray-300); margin-bottom: var(--space-3); font-size: var(--font-lg);">
+                        <span style="font-weight:bold; color:#F59E0B;">📞 07813798636</span>
+                        <span style="color:#8B5CF6; font-weight:700;"> (السعبري)</span>
+                    </p>
+                    <p style="color: var(--gray-300); margin-bottom: var(--space-3); font-size: var(--font-lg);">📧 info@emall-iq.com</p>
+                    <p style="color: var(--gray-300); font-size: var(--font-lg);">🕒 متاح 24/7</p>
+                    <p style="color: var(--success-solid); font-size: var(--font-sm); margin-top: var(--space-3);">🔗 متصل بـ Supabase</p>
+                </div>
+                
+                <button class="btn btn-success w-full" onclick="openWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                    تواصل عبر واتساب
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-info-circle"></i>
+                    حول كلاشي
+                </h3>
+                <button class="close-btn" onclick="closeModal('aboutModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div style="padding: var(--space-4); text-align: center;">
+                <p style="color: var(--gray-300); line-height: 1.6; margin-bottom: var(--space-5); font-size: var(--font-lg);">
+                    كلاشي هو منصة تجمع أفضل المتاجر المحلية في شبكة تفاعلية متطورة مع قاعدة بيانات سحابية. 
+                    نهدف إلى تقديم تجربة تسوق استثنائية مع تقنيات حديثة.
+                </p>
+                
+                <div style="background: var(--glass); border-radius: var(--radius-xl); padding: var(--space-5); margin-bottom: var(--space-5); border: 1px solid var(--glass-border);">
+                    <h4 style="color: var(--primary-solid); margin-bottom: var(--space-4); font-size: var(--font-xl);">مميزات التحديث الرابع</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); text-align: center;">
+                        <div>
+                            <div style="font-size: var(--font-2xl); font-weight: 700; color: white;">🔗</div>
+                            <div style="font-size: var(--font-sm); color: var(--gray-400);">Supabase</div>
+                        </div>
+                        <div>
+                            <div style="font-size: var(--font-2xl); font-weight: 700; color: white;">☁️</div>
+                            <div style="font-size: var(--font-sm); color: var(--gray-400);">قاعدة بيانات سحابية</div>
+                        </div>
+                        <div>
+                            <div style="font-size: var(--font-2xl); font-weight: 700; color: white;">🎨</div>
+                            <div style="font-size: var(--font-sm); color: var(--gray-400);">50+ أيقونة</div>
+                        </div>
+                        <div>
+                            <div style="font-size: var(--font-2xl); font-weight: 700; color: white;">🌈</div>
+                            <div style="font-size: var(--font-sm); color: var(--gray-400);">16 لون</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="color: var(--gray-400); font-size: var(--font-sm);">
+                    &copy; 2025 كلاشي - التحديث الرابع مع Supabase. جميع الحقوق محفوظة.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">إشعار</span>
+    </div>
+
+    <script>
+        // إعدادات Supabase
+        const SUPABASE_URL = 'https://wgvkbrmcgejscgsyapcs.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indndmticm1jZ2Vqc2Nnc3lhcGNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk1MzgwOTUsImV4cCI6MjA2NTExNDA5NX0.FfODkBYSgTBBkoNP40YixlQphKyrzYbuwqSip7-smuU';
+        
+        let supabase;
+        let stores = {};
+        let isAdmin = localStorage.getItem('emall_admin') === 'true';
+        let isConnected = false;
+
+        // Initialize Supabase with better error handling
+        function initSupabase() {
+            try {
+                // Check if Supabase is loaded
+                if (typeof window.supabase === 'undefined') {
+                    console.error('❌ Supabase library not loaded');
+                    updateDBStatus('error', 'مكتبة Supabase غير محملة');
+                    return false;
+                }
+
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                
+                // Test connection
+                testSupabaseConnection();
+                
+                console.log('✅ Supabase client initialized');
+                updateDBStatus('connected', 'جاري اختبار الاتصال...');
+                isConnected = true;
+                return true;
+            } catch (error) {
+                console.error('❌ Supabase initialization error:', error);
+                updateDBStatus('error', 'خطأ في إعداد الاتصال');
+                isConnected = false;
+                return false;
+            }
+        }
+
+        // Test Supabase connection
+        async function testSupabaseConnection() {
+            try {
+                const { data, error } = await supabase
+                    .from('stores')
+                    .select('count', { count: 'exact', head: true });
+
+                if (error) {
+                    console.warn('⚠️ Connection test failed:', error);
+                    updateDBStatus('error', 'فشل اختبار الاتصال');
+                    isConnected = false;
+                } else {
+                    console.log('✅ Connection test successful');
+                    updateDBStatus('connected', 'متصل بنجاح');
+                    isConnected = true;
+                }
+            } catch (error) {
+                console.error('❌ Connection test error:', error);
+                updateDBStatus('error', 'خطأ في اختبار الاتصال');
+                isConnected = false;
+            }
+        }
+
+        // Update database status indicator
+        function updateDBStatus(status, message) {
+            const dbStatus = document.getElementById('dbStatus');
+            const dbStatusText = document.getElementById('dbStatusText');
+            
+            dbStatus.className = `db-status ${status}`;
+            dbStatusText.textContent = message;
+        }
+
+        // Load stores from Supabase
+        async function loadStoresFromDB() {
+            if (!isConnected) {
+                console.log('📡 لا يوجد اتصال بقاعدة البيانات، تحميل البيانات الافتراضية...');
+                loadDefaultStores();
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('stores')
+                    .select('*')
+                    .order('created_at', { ascending: true });
+
+                if (error) {
+                    console.error('❌ خطأ في تحميل المتاجر:', error);
+                    loadDefaultStores();
+                    updateDBStatus('error', 'خطأ في تحميل البيانات');
+                    return;
+                }
+
+                console.log('📦 تم تحميل المتاجر من قاعدة البيانات:', data);
+                
+                // Clear existing stores
+                stores = {};
+                const storesGrid = document.getElementById('storesGrid');
+                const addBtn = document.getElementById('addStoreBtn');
+                storesGrid.innerHTML = '';
+                storesGrid.appendChild(addBtn);
+
+                // Add stores from database
+                if (data && data.length > 0) {
+                    data.forEach(store => {
+                        stores[store.id] = {
+                            id: store.id,
+                            name: store.name,
+                            description: store.description,
+                            url: store.url,
+                            icon: store.icon,
+                            color: store.color,
+                            available: store.available || true,
+                            fromDB: true
+                        };
+                        addStoreToGrid(store.id, stores[store.id]);
+                    });
+                    updateStoreCount();
+                    showNotification(`📦 تم تحميل ${data.length} متجر من قاعدة البيانات`);
+                } else {
+                    loadDefaultStores();
+                }
+                
+                updateDBStatus('connected', `متصل - ${Object.keys(stores).length} متجر`);
+            } catch (error) {
+                console.error('❌ خطأ في الاتصال بقاعدة البيانات:', error);
+                loadDefaultStores();
+                updateDBStatus('error', 'خطأ في الاتصال');
+            }
+        }
+
+        // Load default stores (fallback)
+        function loadDefaultStores() {
+            stores = {
+                'alhajami': {
+                    id: 'alhajami',
+                    name: 'محلات الحجامي',
+                    description: 'أجود أنواع الشالات والطرحات والسجادات التركية الأصلية بأفضل الأسعار',
+                    url: './alhajami.html',
+                    icon: 'fas fa-user-tie',
+                    color: 'textiles',
+                    available: true,
+                    fromDB: false
+                }
+            };
+
+            const storesGrid = document.getElementById('storesGrid');
+            const addBtn = document.getElementById('addStoreBtn');
+            storesGrid.innerHTML = '';
+            storesGrid.appendChild(addBtn);
+            
+            Object.entries(stores).forEach(([storeId, store]) => {
+                addStoreToGrid(storeId, store);
+            });
+            
+            updateStoreCount();
+            showNotification('📦 تم تحميل البيانات الافتراضية', 'warning');
+        }
+
+        // Save store to Supabase
+        async function saveStoreToSupabase(storeData) {
+            if (!isConnected) {
+                showNotification('❌ لا يوجد اتصال بقاعدة البيانات', 'error');
+                return null;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('stores')
+                    .insert([{
+                        name: storeData.name,
+                        description: storeData.description,
+                        url: storeData.url,
+                        icon: storeData.icon,
+                        color: storeData.color,
+                        available: storeData.available || true
+                    }])
+                    .select()
+                    .single();
+
+                if (error) {
+                    console.error('❌ خطأ في حفظ المتجر:', error);
+                    showNotification('❌ خطأ في حفظ المتجر', 'error');
+                    return null;
+                }
+
+                console.log('✅ تم حفظ المتجر في قاعدة البيانات:', data);
+                return data;
+            } catch (error) {
+                console.error('❌ خطأ في الاتصال:', error);
+                showNotification('❌ خطأ في الاتصال بقاعدة البيانات', 'error');
+                return null;
+            }
+        }
+
+        // Sync data manually
+        async function syncData() {
+            const syncBtn = document.getElementById('syncBtn');
+            const syncIcon = syncBtn.querySelector('i');
+            
+            syncIcon.classList.add('syncing');
+            showNotification('🔄 جاري مزامنة البيانات...');
+            
+            await loadStoresFromDB();
+            
+            setTimeout(() => {
+                syncIcon.classList.remove('syncing');
+                showNotification('✅ تم تحديث البيانات بنجاح');
+            }, 1000);
+        }
+
+        // Initialize app with enhanced loading and better error handling
+        document.addEventListener('DOMContentLoaded', function() {
+            showLoadingOverlay();
+            
+            // Wait a bit for external scripts to load
+            setTimeout(async () => {
+                // Check if Supabase library is available
+                let supabaseReady = false;
+                let attempts = 0;
+                const maxAttempts = 3;
+
+                while (!supabaseReady && attempts < maxAttempts) {
+                    attempts++;
+                    console.log(`🔄 محاولة تهيئة Supabase (${attempts}/${maxAttempts})...`);
+                    
+                    if (typeof window.supabase !== 'undefined') {
+                        supabaseReady = initSupabase();
+                        if (supabaseReady) break;
+                    } else {
+                        console.warn(`⚠️ Supabase library not found (attempt ${attempts})`);
+                        updateDBStatus('error', `محاولة ${attempts}: المكتبة غير محملة`);
+                    }
+                    
+                    // Wait before retry
+                    if (attempts < maxAttempts) {
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+                }
+
+                if (!supabaseReady) {
+                    console.warn('⚠️ تم التحول إلى الوضع المحلي');
+                    updateDBStatus('error', 'وضع محلي - لا يوجد اتصال');
+                }
+                
+                // Load stores
+                await loadStoresFromDB();
+                
+                // Initialize other features
+                initializeApp();
+                
+                if (isAdmin) {
+                    showAdminElements();
+                }
+                
+                hideLoadingOverlay();
+                
+                // Enhanced welcome message
+                setTimeout(() => {
+                    if (isConnected) {
+                        showNotification('🎉 التحديث الرابع: متصل بقاعدة البيانات!');
+                    } else {
+                        showNotification('⚠️ وضع محلي - تحقق من الاتصال بالإنترنت', 'warning');
+                    }
+                }, 500);
+            }, 2000);
+        });
+
+        function showLoadingOverlay() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        function hideLoadingOverlay() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        function initializeApp() {
+            // Initialize enhanced animations
+            initScrollAnimations();
+            initHeaderScrollEffect();
+        }
+
+        // Enhanced header scroll effect
+        function initHeaderScrollEffect() {
+            let lastScroll = 0;
+            const header = document.getElementById('header');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScroll = currentScroll;
+            });
+        }
+
+        // Enhanced store opening with loading
+        function openStore(storeId) {
+            const store = stores[storeId];
+            
+            if (!store) {
+                showNotification('المتجر غير موجود', 'error');
+                return;
+            }
+            
+            if (!store.available) {
+                showNotification(`${store.name} قريباً... 🔜`, 'warning');
+                // Add special animation for coming soon stores
+                const storeCard = document.querySelector(`.store-card[onclick*="${storeId}"]`);
+                if (storeCard) {
+                    storeCard.classList.add('success-animation');
+                    setTimeout(() => {
+                        storeCard.classList.remove('success-animation');
+                    }, 600);
+                }
+                return;
+            }
+            
+            // Enhanced loading animation
+            const storeCard = document.querySelector(`.store-card[onclick*="${storeId}"]`);
+            if (storeCard) {
+                storeCard.style.transform = 'translateY(-10px) scale(0.95) rotateX(10deg)';
+                storeCard.style.filter = 'brightness(1.2)';
+                setTimeout(() => {
+                    storeCard.style.transform = '';
+                    storeCard.style.filter = '';
+                }, 400);
+            }
+            
+            // Show enhanced loading
+            showLoadingOverlay();
+            document.querySelector('.loading-text').textContent = `جاري فتح ${store.name}...`;
+            
+            setTimeout(() => {
+                hideLoadingOverlay();
+                showNotification(`🛍️ مرحباً بك في ${store.name}!`);
+                setTimeout(() => {
+                    window.location.href = store.url;
+                }, 500);
+            }, 1500);
+        }
+
+        // Enhanced admin functions
+        function toggleAdmin() {
+            const password = prompt('🔐 أدخل كلمة مرور الإدارة:');
+            if (password === 'admin123') {
+                isAdmin = !isAdmin;
+                localStorage.setItem('emall_admin', isAdmin.toString());
+                if (isAdmin) {
+                    showAdminElements();
+                    showNotification('🔓 تم تفعيل وضع الإدارة المتقدم');
+                    // Add special effect for admin mode
+                    document.body.style.filter = 'hue-rotate(30deg)';
+                    setTimeout(() => {
+                        document.body.style.filter = '';
+                    }, 1000);
+                } else {
+                    hideAdminElements();
+                    showNotification('🔒 تم إلغاء وضع الإدارة');
+                }
+            } else if (password !== null) {
+                showNotification('❌ كلمة مرور خاطئة', 'error');
+            }
+        }
+
+        function showAdminElements() {
+            const addBtn = document.getElementById('addStoreBtn');
+            addBtn.classList.remove('hide');
+            // Add entrance animation
+            setTimeout(() => {
+                addBtn.style.animation = 'fadeInUp 0.5s ease-out';
+            }, 100);
+        }
+
+        function hideAdminElements() {
+            document.getElementById('addStoreBtn').classList.add('hide');
+        }
+
+        function openAddStoreModal() {
+            document.getElementById('addStoreModal').classList.add('active');
+        }
+
+        async function handleAddStore(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('storeName').value.trim();
+            const description = document.getElementById('storeDescription').value.trim();
+            const url = document.getElementById('storeUrl').value.trim();
+            const icon = document.getElementById('storeIcon').value;
+            const color = document.getElementById('storeColor').value;
+            
+            if (!name || !description || !url || !icon || !color) {
+                showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            // Show loading
+            showLoadingOverlay();
+            document.querySelector('.loading-text').textContent = 'جاري إضافة المتجر إلى قاعدة البيانات...';
+            
+            const storeData = {
+                name,
+                description,
+                url,
+                icon,
+                color,
+                available: true
+            };
+
+            try {
+                // Save to Supabase
+                const savedStore = await saveStoreToSupabase(storeData);
+                
+                if (savedStore) {
+                    // Add to local stores
+                    stores[savedStore.id] = {
+                        ...storeData,
+                        id: savedStore.id,
+                        fromDB: true
+                    };
+                    
+                    // Add to grid with animation
+                    addStoreToGrid(savedStore.id, stores[savedStore.id]);
+                    updateStoreCount();
+                    updateDBStatus('connected', `متصل - ${Object.keys(stores).length} متجر`);
+                    
+                    showNotification('✅ تم حفظ المتجر في قاعدة البيانات بنجاح!');
+                } else {
+                    // Fallback to local storage
+                    const storeId = 'store_' + Date.now();
+                    stores[storeId] = {
+                        ...storeData,
+                        id: storeId,
+                        fromDB: false
+                    };
+                    
+                    addStoreToGrid(storeId, stores[storeId]);
+                    updateStoreCount();
+                    
+                    showNotification('⚠️ تم حفظ المتجر محلياً (لا يوجد اتصال)', 'warning');
+                }
+                
+                // Close modal and reset form
+                closeModal('addStoreModal');
+                document.getElementById('addStoreForm').reset();
+                
+            } catch (error) {
+                console.error('❌ خطأ في إضافة المتجر:', error);
+                showNotification('❌ خطأ في إضافة المتجر', 'error');
+            }
+            
+            hideLoadingOverlay();
+        }
+
+        function addStoreToGrid(storeId, store) {
+            const grid = document.getElementById('storesGrid');
+            const addBtn = document.getElementById('addStoreBtn');
+            
+            const storeCard = document.createElement('div');
+            storeCard.className = `store-card ${store.color} fade-in-up`;
+            storeCard.onclick = () => openStore(storeId);
+            
+            storeCard.innerHTML = `
+                <div class="store-header">
+                    <i class="${store.icon} store-icon"></i>
+                </div>
+                <div class="store-content">
+                    <h3 class="store-name">${store.name}</h3>
+                    <p class="store-description">${store.description}</p>
+                    <div class="store-action">
+                        <button class="store-btn">
+                            <i class="fas fa-shopping-bag"></i>
+                            تسوق الآن
+                        </button>
+                    </div>
+                </div>
+                ${store.fromDB ? `<div class="coming-soon-badge" style="background: var(--success-solid);">🔗 DB</div>` : ''}
+            `;
+            
+            grid.insertBefore(storeCard, addBtn);
+            
+            // Add entrance animation
+            setTimeout(() => {
+                storeCard.style.animation = 'fadeInUp 0.8s ease-out';
+            }, 100);
+        }
+
+        function updateStoreCount() {
+            const storeCount = document.getElementById('storeCount');
+            storeCount.textContent = Object.keys(stores).length;
+        }
+
+        // Enhanced navigation functions
+        function scrollToStores() {
+            document.getElementById('stores').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            updateActiveNavItem(1);
+            showNotification('📍 تم الانتقال إلى قسم المتاجر');
+        }
+
+        function goToHome() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            updateActiveNavItem(0);
+            showNotification('🏠 العودة إلى الصفحة الرئيسية');
+        }
+
+        function showContact() {
+            document.getElementById('contactModal').classList.add('active');
+            updateActiveNavItem(2);
+        }
+
+        function showAbout() {
+            document.getElementById('aboutModal').classList.add('active');
+            updateActiveNavItem(3);
+        }
+
+        function updateActiveNavItem(index) {
+            document.querySelectorAll('.nav-item').forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function openWhatsApp() {
+            const message = encodeURIComponent('السلام عليكم، أريد الاستفسار عن خدمات كلاشي - التحديث الرابع مع قاعدة البيانات 🚀🔗');
+            window.open(`https://wa.me/9647813798636?text=${message}`, '_blank');
+            showNotification('📱 تم فتح واتساب...');
+        }
+
+        // Enhanced modal functions
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.animation = 'modalFadeOut 0.3s ease-out';
+            setTimeout(() => {
+                modal.classList.remove('active');
+                modal.style.animation = '';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                const modalId = e.target.id;
+                closeModal(modalId);
+            }
+        });
+
+        // Enhanced notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.className = `notification ${type}`;
+            
+            const icon = notification.querySelector('i');
+            if (type === 'error') {
+                icon.className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                icon.className = 'fas fa-exclamation-triangle';
+            } else {
+                icon.className = 'fas fa-check-circle';
+            }
+            
+            notification.classList.add('show');
+            
+            // Auto hide with enhanced timing
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.style.animation = '';
+                }, 300);
+            }, 4000);
+        }
+
+        // Enhanced scroll animations
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        
+                        // Add stagger effect for store cards
+                        if (entry.target.classList.contains('store-card')) {
+                            const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 100;
+                            setTimeout(() => {
+                                entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                            }, delay);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    closeModal(modal.id);
+                });
+            }
+            
+            // Add keyboard shortcuts
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'h':
+                        e.preventDefault();
+                        goToHome();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        scrollToStores();
+                        break;
+                    case 'c':
+                        e.preventDefault();
+                        showContact();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        syncData();
+                        break;
+                }
+            }
+        });
+
+        // Enhanced mobile touch handling
+        let touchStartY = 0;
+        let touchStartX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+            touchStartY = e.touches[0].clientY;
+            touchStartX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 1) {
+                e.preventDefault();
+            }
+        });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+            
+            const touchEndY = e.changedTouches[0].clientY;
+            const touchEndX = e.changedTouches[0].clientX;
+            const deltaY = touchStartY - touchEndY;
+            const deltaX = touchStartX - touchEndX;
+            
+            // Add swipe gestures
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    // Swipe left - next section
+                    scrollToStores();
+                } else {
+                    // Swipe right - previous section
+                    goToHome();
+                }
+            }
+        }, false);
+
+        // Real-time updates from Supabase
+        function setupRealtimeUpdates() {
+            if (!isConnected || !supabase) {
+                console.log('📡 التحديثات الفورية غير متاحة - لا يوجد اتصال');
+                return;
+            }
+
+            try {
+                const subscription = supabase
+                    .channel('stores-changes')
+                    .on('postgres_changes', 
+                        { 
+                            event: '*', 
+                            schema: 'public', 
+                            table: 'stores' 
+                        }, 
+                        (payload) => {
+                            console.log('🔄 تحديث في قاعدة البيانات:', payload);
+                            
+                            switch (payload.eventType) {
+                                case 'INSERT':
+                                    handleNewStore(payload.new);
+                                    break;
+                                case 'UPDATE':
+                                    handleUpdateStore(payload.new);
+                                    break;
+                                case 'DELETE':
+                                    handleDeleteStore(payload.old);
+                                    break;
+                            }
+                        }
+                    )
+                    .subscribe();
+
+                console.log('🔔 تم تفعيل التحديثات الفورية');
+                showNotification('🔔 التحديثات الفورية مفعلة');
+            } catch (error) {
+                console.error('❌ خطأ في تفعيل التحديثات الفورية:', error);
+                showNotification('⚠️ التحديثات الفورية غير متاحة', 'warning');
+            }
+        }
+
+        function handleNewStore(newStore) {
+            if (!stores[newStore.id]) {
+                stores[newStore.id] = {
+                    id: newStore.id,
+                    name: newStore.name,
+                    description: newStore.description,
+                    url: newStore.url,
+                    icon: newStore.icon,
+                    color: newStore.color,
+                    available: newStore.available,
+                    fromDB: true
+                };
+                
+                addStoreToGrid(newStore.id, stores[newStore.id]);
+                updateStoreCount();
+                showNotification(`🆕 تم إضافة متجر جديد: ${newStore.name}`);
+            }
+        }
+
+        function handleUpdateStore(updatedStore) {
+            if (stores[updatedStore.id]) {
+                stores[updatedStore.id] = {
+                    ...stores[updatedStore.id],
+                    ...updatedStore,
+                    fromDB: true
+                };
+                
+                // Re-render the store card
+                const existingCard = document.querySelector(`[onclick*="${updatedStore.id}"]`);
+                if (existingCard) {
+                    existingCard.remove();
+                }
+                addStoreToGrid(updatedStore.id, stores[updatedStore.id]);
+                showNotification(`🔄 تم تحديث متجر: ${updatedStore.name}`);
+            }
+        }
+
+        function handleDeleteStore(deletedStore) {
+            if (stores[deletedStore.id]) {
+                delete stores[deletedStore.id];
+                
+                const existingCard = document.querySelector(`[onclick*="${deletedStore.id}"]`);
+                if (existingCard) {
+                    existingCard.remove();
+                }
+                
+                updateStoreCount();
+                showNotification(`🗑️ تم حذف متجر: ${deletedStore.name}`, 'warning');
+            }
+        }
+
+        // Performance optimization
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Add CSS animation for fadeOut
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes modalFadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); }
+                to { transform: translateX(400px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Enhanced console logs
+        console.log('🚀 كلاشي - التحديث الرابع مع Supabase جاهز!');
+        console.log('🔗 قاعدة البيانات: Supabase (سيتم اختبار الاتصال...)');
+        console.log('📱 متجرين في صف على جميع الأجهزة');
+        console.log('✨ تفاعلات ثلاثية الأبعاد محسنة');
+        console.log('🎨 50+ أيقونة و 16 لون للمتاجر');
+        console.log('☁️ حفظ سحابي مع تحديثات فورية');
+        console.log('⚡ أداء محسن مع debouncing');
+        console.log('🔧 نظام إدارة متطور');
+        console.log('⌨️ اختصارات جديدة: Ctrl+R (مزامنة)');
+        console.log('🔔 التحديثات الفورية من قاعدة البيانات');
+        console.log('🛠️ إصلاح: تحسين تحميل مكتبة Supabase');
+        
+        // Setup realtime updates after initialization
+        setTimeout(() => {
+            if (isConnected && typeof window.supabase !== 'undefined') {
+                setupRealtimeUpdates();
+            } else {
+                console.log('📡 التحديثات الفورية غير متاحة في هذه الجلسة');
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
