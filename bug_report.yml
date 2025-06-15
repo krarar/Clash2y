@@ -1,0 +1,192 @@
+name: 🐛 الإبلاغ عن خطأ
+description: أبلغ عن خطأ لمساعدتنا في تحسين كلاشي
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        شكراً لإبلاغك عن الخطأ! سيساعدنا هذا في تحسين كلاشي.
+        
+        قبل إرسال التقرير، تأكد من:
+        - البحث في Issues الموجودة لتجنب التكرار
+        - استخدام أحدث إصدار من التطبيق
+        - تجربة المشكلة في متصفح آخر
+
+  - type: input
+    id: summary
+    attributes:
+      label: 📋 ملخص المشكلة
+      description: وصف مختصر وواضح للخطأ
+      placeholder: "مثال: لا يمكن إضافة منتجات إلى السلة"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 وصف تفصيلي
+      description: اشرح المشكلة بالتفصيل
+      placeholder: |
+        - ماذا حدث؟
+        - ماذا توقعت أن يحدث؟
+        - متى تحدث المشكلة؟
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔄 خطوات إعادة إنتاج المشكلة
+      description: خطوات واضحة لإعادة إنتاج المشكلة
+      value: |
+        1. اذهب إلى '...'
+        2. اضغط على '...'
+        3. انتقل إلى '...'
+        4. شاهد الخطأ
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ النتيجة المتوقعة
+      description: ماذا توقعت أن يحدث؟
+      placeholder: "يجب أن يتم إضافة المنتج إلى السلة بنجاح"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ النتيجة الفعلية
+      description: ماذا حدث بدلاً من ذلك؟
+      placeholder: "ظهر خطأ وتم رفض الإضافة"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device_type
+    attributes:
+      label: 📱 نوع الجهاز
+      description: أي نوع من الأجهزة تستخدم؟
+      options:
+        - هاتف ذكي (Android)
+        - هاتف ذكي (iPhone)
+        - جهاز لوحي (Android)
+        - جهاز لوحي (iPad)
+        - حاسوب محمول
+        - حاسوب مكتبي
+        - أخرى
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: 🌐 المتصفح
+      description: أي متصفح تستخدم؟
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Opera
+        - Samsung Internet
+        - أخرى
+    validations:
+      required: true
+
+  - type: input
+    id: browser_version
+    attributes:
+      label: 🔢 إصدار المتصفح
+      description: أي إصدار من المتصفح؟
+      placeholder: "مثال: Chrome 119.0.6045.159"
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 💻 نظام التشغيل
+      description: أي نظام تشغيل تستخدم؟
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS
+        - Ubuntu/Linux
+        - Android
+        - iOS
+        - أخرى
+    validations:
+      required: true
+
+  - type: dropdown
+    id: app_mode
+    attributes:
+      label: 📲 وضع التطبيق
+      description: كيف تصل إلى كلاشي؟
+      options:
+        - متصفح عادي
+        - تطبيق مثبت (PWA)
+        - وضع ملء الشاشة
+        - لست متأكداً
+    validations:
+      required: true
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: 🌐 حالة الاتصال
+      description: هل كنت متصلاً بالإنترنت؟
+      options:
+        - متصل (Wi-Fi قوي)
+        - متصل (Wi-Fi ضعيف)
+        - متصل (بيانات الهاتف)
+        - غير متصل (Offline)
+        - غير متأكد
+    validations:
+      required: true
+
+  - type: textarea
+    id: console_errors
+    attributes:
+      label: 🔍 رسائل الخطأ (Console Errors)
+      description: إذا كنت تعرف كيفية فتح Developer Tools، انسخ أي رسائل خطأ
+      placeholder: |
+        افتح Developer Tools (F12) واذهب إلى Console
+        انسخ أي رسائل خطأ باللون الأحمر
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📷 لقطات الشاشة
+      description: أرفق لقطات شاشة أو روابط للصور
+      placeholder: |
+        اسحب وأفلت الصور هنا أو
+        ارفعها إلى خدمة مثل imgur.com والصق الرابط
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 📋 معلومات إضافية
+      description: أي معلومات أخرى قد تفيد في حل المشكلة؟
+      placeholder: |
+        - هل المشكلة تحدث دائماً أم أحياناً؟
+        - هل جربت حلول أخرى؟
+        - معلومات أخرى مفيدة
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: ✅ التأكيدات
+      description: يرجى التأكيد على النقاط التالية
+      options:
+        - label: بحثت في Issues الموجودة ولم أجد مشكلة مشابهة
+          required: true
+        - label: جربت المشكلة في متصفح مختلف (إن أمكن)
+          required: false
+        - label: أستخدم أحدث إصدار من المتصفح
+          required: false
+        - label: المعلومات المقدمة دقيقة وكاملة
+          required: true

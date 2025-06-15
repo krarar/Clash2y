@@ -1,0 +1,52 @@
+{
+  "recommendations": [
+    // HTML & CSS
+    "bradlc.vscode-tailwindcss",
+    "ecmel.vscode-html-css",
+    "ms-vscode.vscode-css-peek",
+    "zignd.html-css-class-completion",
+    
+    // JavaScript
+    "ms-vscode.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    
+    // PWA & Web Development
+    "ms-vscode.vscode-json",
+    "ritwickdey.liveserver",
+    "ms-edgedevtools.vscode-edge-devtools",
+    "firefox-devtools.vscode-firefox-debug",
+    
+    // Git & Version Control
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+    "github.github-vscode-theme",
+    
+    // Productivity
+    "ms-vscode.vscode-icons",
+    "pkief.material-icon-theme",
+    "gruntfuggly.todo-tree",
+    "streetsidesoftware.code-spell-checker",
+    
+    // Arabic Language Support
+    "ms-ceintl.vscode-language-pack-ar",
+    "ahmadalli.vscode-arabic-support",
+    
+    // Performance & Debugging
+    "ms-vscode.vscode-network-requests",
+    "ms-vscode.vscode-service-worker-tools",
+    "google.lighthouse",
+    
+    // Documentation
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    
+    // File Management
+    "alefragnani.project-manager",
+    "formulahendry.auto-rename-tag",
+    "ms-vscode.hexeditor"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-chrome-debug-core"
+  ]
+}

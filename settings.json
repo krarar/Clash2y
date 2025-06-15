@@ -1,0 +1,68 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "html.format.indentInnerHtml": true,
+  "html.format.wrapLineLength": 120,
+  "css.validate": true,
+  "javascript.validate.enable": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "liveServer.settings.port": 3000,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "liveServer.settings.host": "localhost",
+  "files.associations": {
+    "*.webmanifest": "json",
+    "*.manifest": "json"
+  },
+  "workbench.colorTheme": "Default Dark Modern",
+  "editor.minimap.enabled": true,
+  "editor.wordWrap": "on",
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "extensions.ignoreRecommendations": false,
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true
+  },
+  "html.suggest.html5": true,
+  "css.lint.unknownProperties": "warning",
+  "css.lint.validProperties": [
+    "backdrop-filter",
+    "-webkit-backdrop-filter",
+    "-webkit-background-clip",
+    "-webkit-text-fill-color"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.shell.windows": "cmd.exe"
+}
