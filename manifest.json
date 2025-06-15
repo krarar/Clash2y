@@ -1,126 +1,127 @@
 {
-  "name": "كلاشي - متاجر متعددة",
+  "name": "كلاشي - السوق الإلكتروني الشامل",
   "short_name": "كلاشي",
-  "description": "كلاشي - مجموعة متنوعة من المتاجر المختلفة في مكان واحد مع قاعدة بيانات سحابية",
-  "start_url": "./",
+  "description": "سوق الكتروني شامل يجمع أفضل المتاجر والمنتجات في مكان واحد",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#0F172A",
-  "theme_color": "#8B5CF6",
   "orientation": "portrait-primary",
-  "scope": "./",
+  "theme_color": "#8B5CF6",
+  "background_color": "#0F172A",
   "lang": "ar",
   "dir": "rtl",
-  "categories": ["shopping", "business", "lifestyle"],
+  "categories": ["shopping", "business", "productivity"],
+  "prefer_related_applications": false,
   "screenshots": [
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720' viewBox='0 0 1280 720'%3E%3Cdefs%3E%3ClinearGradient id='bgGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23334155'/%3E%3Cstop offset='100%25' style='stop-color:%230F172A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1280' height='720' fill='url(%23bgGrad)'/%3E%3Ctext x='640' y='300' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='80' font-weight='bold'%3Eكلاشي%3C/text%3E%3Ctext x='640' y='380' text-anchor='middle' fill='white' font-family='Arial' font-size='32'%3Eالسوق الإلكتروني الشامل%3C/text%3E%3Ctext x='640' y='450' text-anchor='middle' fill='%23CBD5E1' font-family='Arial' font-size='24'%3Eمنتجات متنوعة من متاجر مختارة%3C/text%3E%3C/svg%3E",
       "sizes": "1280x720",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "form_factor": "wide",
-      "label": "شاشة رئيسية لكلاشي"
+      "label": "كلاشي - الصفحة الرئيسية"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='750' height='1334' viewBox='0 0 750 1334'%3E%3Cdefs%3E%3ClinearGradient id='bgGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23334155'/%3E%3Cstop offset='100%25' style='stop-color:%230F172A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='750' height='1334' fill='url(%23bgGrad)'/%3E%3Ctext x='375' y='600' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='60' font-weight='bold'%3Eكلاشي%3C/text%3E%3Ctext x='375' y='700' text-anchor='middle' fill='white' font-family='Arial' font-size='28'%3Eتطبيق التسوق الذكي%3C/text%3E%3Ctext x='375' y='800' text-anchor='middle' fill='%23CBD5E1' font-family='Arial' font-size='20'%3Eمتاح على الهاتف والحاسوب%3C/text%3E%3C/svg%3E",
       "sizes": "750x1334",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "form_factor": "narrow",
-      "label": "واجهة المتاجر"
+      "label": "كلاشي - عرض الهاتف"
     }
   ],
   "icons": [
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "72x72",
-      "type": "image/png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='url(%23grad)' rx='32'/%3E%3Cpath d='M48 72h96c4.4 0 8 3.6 8 8v64c0 4.4-3.6 8-8 8H48c-4.4 0-8-3.6-8-8V80c0-4.4 3.6-8 8-8z' fill='white' opacity='0.9'/%3E%3Cpath d='M64 88h64v8H64v-8zm0 16h48v8H64v-8zm0 16h32v8H64v-8z' fill='%238B5CF6'/%3E%3Ctext x='96' y='132' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='16' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='url(%23grad)' rx='80'/%3E%3Cpath d='M128 192h256c12 0 22 10 22 22v172c0 12-10 22-22 22H128c-12 0-22-10-22-22V214c0-12 10-22 22-22z' fill='white' opacity='0.95'/%3E%3Cpath d='M170 235h172v22H170v-22zm0 43h128v22H170v-22zm0 43h86v22H170v-22z' fill='%238B5CF6'/%3E%3Ctext x='256' y='350' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='42' font-weight='bold'%3Eكلاشي%3C/text%3E%3Cpath d='M220 120c-8 0-15 7-15 15v25h-15c-8 0-15 7-15 15s7 15 15 15h15v15c0 8 7 15 15 15s15-7 15-15v-15h15c8 0 15-7 15-15s-7-15-15-15h-15v-25c0-8-7-15-15-15z' fill='white'/%3E%3Cpath d='M320 120c-8 0-15 7-15 15v57c0 8 7 15 15 15s15-7 15-15v-57c0-8-7-15-15-15z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "96x96",
-      "type": "image/png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' fill='url(%23grad)' rx='30'/%3E%3Cpath d='M45 68h90c4 0 7 3 7 7v60c0 4-3 7-7 7H45c-4 0-7-3-7-7V75c0-4 3-7 7-7z' fill='white' opacity='0.9'/%3E%3Cpath d='M60 82h60v6H60v-6zm0 12h45v6H60v-6zm0 12h30v6H60v-6z' fill='%238B5CF6'/%3E%3Ctext x='90' y='125' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='14' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "128x128",
-      "type": "image/png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='167' height='167' viewBox='0 0 167 167'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='167' height='167' fill='url(%23grad)' rx='28'/%3E%3Cpath d='M42 63h83c4 0 7 3 7 7v56c0 4-3 7-7 7H42c-4 0-7-3-7-7V70c0-4 3-7 7-7z' fill='white' opacity='0.9'/%3E%3Ctext x='83' y='115' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='13' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
+      "sizes": "167x167",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='152' height='152' fill='url(%23grad)' rx='25'/%3E%3Cpath d='M38 57h76c3 0 6 3 6 6v50c0 3-3 6-6 6H38c-3 0-6-3-6-6V63c0-3 3-6 6-6z' fill='white' opacity='0.9'/%3E%3Ctext x='76' y='105' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='12' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
       "sizes": "152x152",
-      "type": "image/png",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "192x192",
-      "type": "image/png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23grad)' rx='20'/%3E%3Cpath d='M30 45h60c3 0 5 2 5 5v40c0 3-2 5-5 5H30c-3 0-5-2-5-5V50c0-3 2-5 5-5z' fill='white' opacity='0.9'/%3E%3Ctext x='60' y='82' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='10' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
+      "sizes": "120x120",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "384x384",
-      "type": "image/png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='76' height='76' viewBox='0 0 76 76'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='76' height='76' fill='url(%23grad)' rx='12'/%3E%3Cpath d='M19 28h38c2 0 4 2 4 4v25c0 2-2 4-4 4H19c-2 0-4-2-4-4V32c0-2 2-4 4-4z' fill='white' opacity='0.9'/%3E%3Ctext x='38' y='50' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='6' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
+      "sizes": "76x76",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238B5CF6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23A855F7;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='60' height='60' fill='url(%23grad)' rx='10'/%3E%3Cpath d='M15 22h30c2 0 3 1 3 3v20c0 2-1 3-3 3H15c-2 0-3-1-3-3V25c0-2 1-3 3-3z' fill='white' opacity='0.9'/%3E%3Ctext x='30' y='40' text-anchor='middle' fill='%238B5CF6' font-family='Arial' font-size='5' font-weight='bold'%3Eكلاشي%3C/text%3E%3C/svg%3E",
+      "sizes": "60x60",
+      "type": "image/svg+xml",
       "purpose": "any"
-    },
-    {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
     }
   ],
   "shortcuts": [
     {
-      "name": "المتاجر",
-      "short_name": "متاجر",
-      "description": "تصفح جميع المتاجر المتاحة",
-      "url": "./#stores",
-      "icons": [
-        {
-          "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-          "sizes": "96x96"
-        }
-      ]
+      "name": "المنتجات",
+      "short_name": "المنتجات",
+      "description": "تصفح المنتجات المتاحة",
+      "url": "/#products",
+      "icons": [{ 
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%236366F1' rx='16'/%3E%3Cpath d='M24 36h48v4H24v-4zm0 8h36v4H24v-4zm0 8h24v4H24v-4z' fill='white'/%3E%3C/svg%3E", 
+        "sizes": "96x96" 
+      }]
     },
     {
-      "name": "تواصل معنا",
-      "short_name": "تواصل",
-      "description": "تواصل مع فريق كلاشي",
-      "url": "./#contact",
-      "icons": [
-        {
-          "src": "https://wgvkbrmcgejscgsyapcs.supabase.co/storage/v1/object/public/images//Clashy.png",
-          "sizes": "96x96"
-        }
-      ]
+      "name": "المتاجر",
+      "short_name": "المتاجر", 
+      "description": "تصفح المتاجر المتاحة",
+      "url": "/#stores",
+      "icons": [{ 
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%2306B6D4' rx='16'/%3E%3Cpath d='M32 28h32v8H32v-8zm-4 12h40v24H28V40z' fill='white'/%3E%3C/svg%3E", 
+        "sizes": "96x96" 
+      }]
+    },
+    {
+      "name": "المفضلة",
+      "short_name": "المفضلة",
+      "description": "عرض المنتجات المفضلة",
+      "url": "/#favorites",
+      "icons": [{ 
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23EF4444' rx='16'/%3E%3Cpath d='M48 32c-4-8-16-8-16 0-2 8 16 24 16 24s18-16 16-24c0-8-12-8-16 0z' fill='white'/%3E%3C/svg%3E", 
+        "sizes": "96x96" 
+      }]
+    },
+    {
+      "name": "سلة التسوق",
+      "short_name": "السلة",
+      "description": "عرض سلة التسوق",
+      "url": "/#cart",
+      "icons": [{ 
+        "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%2310B981' rx='16'/%3E%3Cpath d='M28 32h8l6 20h20l4-12H44l-2-8h20l-6 24H34l-6-20h-8v-4z' fill='white'/%3E%3Ccircle cx='40' cy='64' r='4' fill='white'/%3E%3Ccircle cx='56' cy='64' r='4' fill='white'/%3E%3C/svg%3E", 
+        "sizes": "96x96" 
+      }]
     }
   ],
   "related_applications": [],
-  "prefer_related_applications": false,
   "edge_side_panel": {
     "preferred_width": 400
-  },
-  "launch_handler": {
-    "client_mode": "focus-existing"
   }
 }
