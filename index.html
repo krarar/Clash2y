@@ -3123,6 +3123,339 @@
                 console.error('❌ خطأ في التحديث التلقائي:', error);
             }
         }, 300000); // كل 5 دقائق
+// كود اختبار PWA - أضف هذا في نهاية index.html
+
+// متغيرات PWA
+let deferredPrompt;
+let isInstalled = false;
+let swRegistration = null;
+
+// فحص إذا كان التطبيق مثبت بالفعل
+function checkIfInstalled() {
+  // فحص Standalone mode
+  if (window.matchMedia('(display-mode: standalone)').matches || 
+      window.navigator.standalone === true) {
+    isInstalled = true;
+    console.log('📱 التطبيق مثبت ويعمل في وضع standalone');
+    return true;
+  }
+  
+  // فحص window.navigator.getInstalledRelatedApps (إذا كان متاحاً)
+  if ('getInstalledRelatedApps' in navigator) {
+    navigator.getInstalledRelatedApps().then(apps => {
+      if (apps.length > 0) {
+        isInstalled = true;
+        console.log('📱 التطبيق مثبت:', apps);
+      }
+    });
+  }
+  
+  return false;
+}
+
+// تسجيل Service Worker المحسن
+async function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    try {
+      console.log('🔧 تسجيل Service Worker...');
+      
+      swRegistration = await navigator.serviceWorker.register('/sw.js', {
+        scope: '/'
+      });
+      
+      console.log('✅ Service Worker مسجل بنجاح:', swRegistration.scope);
+      
+      // التحقق من التحديثات
+      swRegistration.addEventListener('updatefound', () => {
+        const newWorker = swRegistration.installing;
+        console.log('🆕 Service Worker جديد متاح');
+        
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            console.log('📥 تحديث Service Worker جاهز');
+            showUpdateNotification();
+          }
+        });
+      });
+      
+      return swRegistration;
+      
+    } catch (error) {
+      console.error('❌ فشل تسجيل Service Worker:', error);
+      return null;
+    }
+  } else {
+    console.warn('⚠️ Service Worker غير مدعوم في هذا المتصفح');
+    return null;
+  }
+}
+
+// معالجة beforeinstallprompt
+function setupInstallPrompt() {
+  window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('🎯 PWA Install Prompt متاح');
+    
+    // منع الإظهار التلقائي
+    e.preventDefault();
+    
+    // حفظ الحدث للاستخدام لاحقاً
+    deferredPrompt = e;
+    
+    // إظهار أزرار التثبيت المخصصة
+    showCustomInstallButtons();
+    
+    // تسجيل المعلومات للتشخيص
+    console.log('📊 معلومات Install Prompt:', {
+      userChoice: 'pending',
+      platform: navigator.platform,
+      userAgent: navigator.userAgent.substr(0, 100) + '...'
+    });
+  });
+  
+  // عند تثبيت التطبيق
+  window.addEventListener('appinstalled', (evt) => {
+    console.log('🎉 تم تثبيت التطبيق بنجاح!');
+    isInstalled = true;
+    hideCustomInstallButtons();
+    showSuccessNotification('تم تثبيت كلاشي بنجاح! 🎉');
+    
+    // إرسال إحصائية (اختياري)
+    trackInstallEvent();
+  });
+}
+
+// إظهار أزرار التثبيت المخصصة
+function showCustomInstallButtons() {
+  const installBanner = document.getElementById('installBanner');
+  const installHeaderBtn = document.getElementById('installHeaderBtn');
+  
+  if (installBanner) {
+    installBanner.classList.add('show');
+  }
+  
+  if (installHeaderBtn) {
+    installHeaderBtn.classList.remove('hide');
+  }
+  
+  console.log('👆 أزرار التثبيت ظاهرة الآن');
+}
+
+// إخفاء أزرار التثبيت
+function hideCustomInstallButtons() {
+  const installBanner = document.getElementById('installBanner');
+  const installHeaderBtn = document.getElementById('installHeaderBtn');
+  
+  if (installBanner) {
+    installBanner.classList.remove('show');
+  }
+  
+  if (installHeaderBtn) {
+    installHeaderBtn.classList.add('hide');
+  }
+}
+
+// تنفيذ التثبيت
+async function promptInstall() {
+  if (!deferredPrompt) {
+    console.warn('⚠️ Install prompt غير متاح');
+    showManualInstallInstructions();
+    return;
+  }
+  
+  console.log('🚀 عرض نافذة التثبيت...');
+  
+  try {
+    // عرض نافذة التثبيت
+    deferredPrompt.prompt();
+    
+    // انتظار اختيار المستخدم
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    console.log(`👤 اختيار المستخدم: ${outcome}`);
+    
+    if (outcome === 'accepted') {
+      console.log('✅ المستخدم قبل التثبيت');
+      hideCustomInstallButtons();
+    } else {
+      console.log('❌ المستخدم رفض التثبيت');
+    }
+    
+    // تنظيف المتغير
+    deferredPrompt = null;
+    
+  } catch (error) {
+    console.error('❌ خطأ في عرض نافذة التثبيت:', error);
+  }
+}
+
+// إظهار تعليمات التثبيت اليدوي
+function showManualInstallInstructions() {
+  const userAgent = navigator.userAgent;
+  let instructions = '';
+  
+  if (/android/i.test(userAgent) && /chrome/i.test(userAgent)) {
+    instructions = `
+      📱 التثبيت على Android Chrome:
+      1. اضغط على ⋮ (القائمة)
+      2. اختر "إضافة إلى الشاشة الرئيسية"
+      3. تأكد من ظهور "تثبيت التطبيق"
+    `;
+  } else if (/iphone|ipad/i.test(userAgent) && /safari/i.test(userAgent)) {
+    instructions = `
+      📱 التثبيت على iOS Safari:
+      1. اضغط على زر المشاركة 📤
+      2. اختر "إضافة إلى الشاشة الرئيسية"
+      3. اضغط "إضافة"
+    `;
+  } else if (/windows/i.test(userAgent)) {
+    instructions = `
+      💻 التثبيت على Windows:
+      1. ابحث عن أيقونة التثبيت ⊕ في شريط العناوين
+      2. اضغط عليها واختر "تثبيت"
+      3. أو اذهب لقائمة Chrome > تثبيت كلاشي
+    `;
+  } else {
+    instructions = `
+      🌐 التثبيت العام:
+      - ابحث عن خيار "إضافة إلى الشاشة الرئيسية" في قائمة المتصفح
+      - أو ابحث عن أيقونة التثبيت في شريط العناوين
+    `;
+  }
+  
+  showNotification(instructions, 'info', 8000);
+}
+
+// فحص متطلبات PWA
+async function checkPWARequirements() {
+  const requirements = {
+    serviceWorker: 'serviceWorker' in navigator,
+    manifest: false,
+    https: location.protocol === 'https:' || location.hostname === 'localhost',
+    standalone: window.matchMedia('(display-mode: standalone)').matches
+  };
+  
+  // فحص الـ manifest
+  try {
+    const response = await fetch('/manifest.json');
+    if (response.ok) {
+      const manifest = await response.json();
+      requirements.manifest = !!(manifest.name && manifest.icons && manifest.start_url);
+    }
+  } catch (error) {
+    console.warn('⚠️ لا يمكن تحميل manifest.json');
+  }
+  
+  console.log('📋 فحص متطلبات PWA:', requirements);
+  
+  // عرض التشخيص
+  const missing = Object.entries(requirements)
+    .filter(([key, value]) => !value)
+    .map(([key]) => key);
+  
+  if (missing.length > 0) {
+    console.warn('⚠️ متطلبات PWA مفقودة:', missing);
+  } else {
+    console.log('✅ جميع متطلبات PWA متوفرة');
+  }
+  
+  return requirements;
+}
+
+// تتبع أحداث التثبيت (للإحصائيات)
+function trackInstallEvent() {
+  // يمكنك إرسال إحصائية هنا
+  console.log('📊 تم تتبع حدث التثبيت');
+  
+  // مثال: Google Analytics
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'app_install', {
+      event_category: 'PWA',
+      event_label: 'Clashy App Install'
+    });
+  }
+}
+
+// إظهار إشعار تحديث
+function showUpdateNotification() {
+  const message = 'تحديث جديد متاح لكلاشي! اضغط لإعادة التحميل.';
+  
+  if (confirm(message)) {
+    window.location.reload();
+  }
+}
+
+// إظهار إشعار نجاح
+function showSuccessNotification(message) {
+  if (typeof showNotification === 'function') {
+    showNotification(message, 'success');
+  } else {
+    console.log(message);
+  }
+}
+
+// تهيئة PWA عند تحميل الصفحة
+async function initializePWA() {
+  console.log('🚀 تهيئة PWA...');
+  
+  // فحص حالة التثبيت
+  checkIfInstalled();
+  
+  // فحص متطلبات PWA
+  await checkPWARequirements();
+  
+  // تسجيل Service Worker
+  await registerServiceWorker();
+  
+  // إعداد معالج التثبيت
+  setupInstallPrompt();
+  
+  // إذا لم يكن مثبتاً، أظهر اقتراح التثبيت بعد تأخير
+  if (!isInstalled) {
+    setTimeout(() => {
+      if (deferredPrompt) {
+        showCustomInstallButtons();
+      } else {
+        console.log('💡 اقتراح: يمكن تثبيت التطبيق من قائمة المتصفح');
+      }
+    }, 5000);
+  }
+  
+  console.log('✅ تم تهيئة PWA بنجاح');
+}
+
+// ربط الأحداث
+document.addEventListener('DOMContentLoaded', () => {
+  // تهيئة PWA
+  initializePWA();
+  
+  // ربط أزرار التثبيت
+  const installBtn = document.getElementById('installBtn');
+  const installHeaderBtn = document.getElementById('installHeaderBtn');
+  
+  if (installBtn) {
+    installBtn.addEventListener('click', promptInstall);
+  }
+  
+  if (installHeaderBtn) {
+    installHeaderBtn.addEventListener('click', promptInstall);
+  }
+});
+
+// التعامل مع تغيير حالة الشبكة
+window.addEventListener('online', () => {
+  console.log('🌐 عاد الاتصال بالإنترنت');
+  showNotification('تم استعادة الاتصال بالإنترنت', 'success');
+});
+
+window.addEventListener('offline', () => {
+  console.log('📴 انقطع الاتصال بالإنترنت');
+  showNotification('تم قطع الاتصال - التطبيق يعمل بوضع عدم الاتصال', 'warning');
+});
+
+// تصدير الدوال للاستخدام العام
+window.promptInstall = promptInstall;
+window.checkPWARequirements = checkPWARequirements;
+        
     </script>
 </body>
 </html>
